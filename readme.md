@@ -14,10 +14,6 @@ python main.py
 ```
 
 ## TODO:
-- save keys to file
 - profiles for different keys
 - security slider (key length, 1024 for speed, 2048 for security. Put performance warning for values >2048)
 - hash
-
-## Time counter
-Hours spent sitting in front of my desk working on this: 2

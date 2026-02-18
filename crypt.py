@@ -6,7 +6,16 @@ def generate_keys(length):
     public_key, private_key = rsa.newkeys(length)
     return public_key, private_key
 
+def return_keys(key):
+    if key is None:
+        raise ValueError("The key cannot be None.")
+        
+    key = str(key)
+    modulus, exponent = map(int, key.split(", "))
+    return rsa.PublicKey(modulus, exponent)
+
 def encrypt(message, public_key):
+    message = str(message)
     encoded = message.encode('utf8')
     enc_message = rsa.encrypt(encoded, public_key)
     return enc_message

@@ -1,0 +1,22 @@
+{
+    "clipboard.label": "Copied to cwipboard successfully~!",
+    
+    "getkeys.label": "Pubwic Key: {public}\nPwivate Key: {private}",
+    "getkeys.copypublic": "Copy Pubwic",
+    "getkeys.copyprivate": "Copy Pwivate",
+    "getkeys.savemessage": "Make sure to save both the pubwic and pwivate key :3\nNEVER share the pwivate key!!1!",
+    "getkeys.save": "Save Keys to File owo",
+    "getkeys.tab": "Make Keys",
+    "getkeys.button": "Genewate New Keys",
+    "getkeys.notgenerated": "No keys genewated yet :3",
+
+    "encrypt.error": "Ewwow with pubwic key: {e}",
+    "encrypt.output": "Encwypted message:\n{enc_message}",
+    "encrypt.title": "Encwypt",
+    "encrypt.label": "Encwypt youw message:",
+    "encrypt.keylabel": "The wecipient's pubwic key:",
+    "encrypt.button": "Encwypt",
+
+    "crash.title": "grr 3:",
+    "crash.message": "You made the pwogwam sad >//<\nWepowt a bug or cwash by making an Issue at https://bmsg.bkd.lol/issue pwease :3"
+}

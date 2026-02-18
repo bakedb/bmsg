@@ -1,4 +1,5 @@
 import tkinter as tk
+from playsound3 import playsound
 
 def startup():
     root = tk.Tk()
@@ -22,5 +23,10 @@ def startup():
     image = tk.PhotoImage(file="bkd.png")
     label = tk.Label(root, image=image)
     label.pack()
+
+    # This is needed to have the sound play and the image display at the same time
+    root.after(100, lambda: 
+    playsound("jingle.wav"))
+
     root.after(3000, root.destroy)
     root.mainloop()
