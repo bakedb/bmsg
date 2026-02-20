@@ -1,21 +1,35 @@
 {
+    "global.close": "Close",
+    "global.error": "Error: {e}",
+    
     "clipboard.label": "Copied to clipboard successfully!",
     
     "getkeys.label": "Public Key: {public}\nPrivate Key: {private}",
     "getkeys.copypublic": "Copy Public",
     "getkeys.copyprivate": "Copy Private",
-    "getkeys.savemessage": "Make sure to save both the public and private key.\nNEVER share the private key!",
+    "getkeys.savemessage": "Make sure to save both the public and private key.\nOne will not work without the other.\nNEVER share the private key!",
     "getkeys.save": "Save Keys to File",
     "getkeys.tab": "Make Keys",
     "getkeys.button": "Generate New Keys",
     "getkeys.notgenerated": "No keys generated yet.",
 
-    "encrypt.error": "Error with public key: {e}",
-    "encrypt.output": "Encrypted message:\n{enc_message}",
     "encrypt.title": "Encrypt",
     "encrypt.label": "Encrypt your message:",
     "encrypt.keylabel": "The recipient's public key:",
     "encrypt.button": "Encrypt",
+    "encrypt.popup.title": "Encrypted Message",
+    "encrypt.popup.output": "Encrypted message:\n{enc_message}",
+    "encrypt.popup.copy": "Copy Output",
+    "encrypt.popup.save": "Save to File",
+
+    "decrypt.title": "Decrypt",
+    "decrypt.label": "Decrypt your message:",
+    "decrypt.keylabel": "Your private key:",
+    "decrypt.button": "Decrypt",
+    "decrypt.popup.title": "Decrypted Message",
+    "decrypt.popup.output": "Decrypted message:\n{dec_message}",
+    "decrypt.popup.copy": "Copy Output",
+    "decrypt.popup.save": "Save to File",
 
     "crash.title": "oops o.o",
     "crash.message": "You made the program sad :(\nReport a bug or crash by making an Issue at https://bmsg.bkd.lol/issue."
