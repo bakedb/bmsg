@@ -8,7 +8,7 @@
     "getkeys.copypublic": "Copy Public",
     "getkeys.copyprivate": "Copy Private",
     "getkeys.savemessage": "Make sure to save both the public and private key.\nOne will not work without the other.\nNEVER share the private key!",
-    "getkeys.save": "Save Keys to File",
+    "getkeys.save": "Save Public Key to File",
     "getkeys.tab": "Make Keys",
     "getkeys.button": "Generate New Keys",
     "getkeys.notgenerated": "No keys generated yet.",

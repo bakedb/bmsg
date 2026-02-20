@@ -37,13 +37,24 @@ def clipboard(input):
     tk.Label(top, text=t.t("clipboard.label")).grid()
     tk.Button(top, text="Ok", command=top.destroy).grid()   
 
-def save_keys_to_file(public, private):
+def save_both_keys_to_file(public, private):
     f = filedialog.asksaveasfile(defaultextension=".txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
     if f:
         content = f"{public}\n{private}"
         # no need to use an "open as" here
         f.write(content)
         f.close()
+
+def save_keys_to_file(key):
+    f = filedialog.asksaveasfile(defaultextension=".txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    if f:
+        f.write(key)
+
+def load_keys_from_file():
+    f = filedialog.askopenfile(defaultextension=".txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    if f:
+        content = f.read()
+        return content
 
 def save_message_to_file(message):
     f = filedialog.asksaveasfile(defaultextension=".txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
@@ -62,7 +73,7 @@ def get_keys(length):
     tk.Button(key_tab, text=t.t("getkeys.copypublic"), command=lambda: clipboard(public_key)).grid(column=0, row=2)
     tk.Button(key_tab, text=t.t("getkeys.copyprivate"), command=lambda: clipboard(private_key)).grid(column=0, row=3)
     tk.Label(key_tab, text=t.t("getkeys.savemessage")).grid(column=0, row=4)
-    tk.Button(key_tab, text=t.t("getkeys.save"), command=lambda: save_keys_to_file(public_key, private_key)).grid(column=0, row=5)
+    tk.Button(key_tab, text=t.t("getkeys.save"), command=lambda: save_keys_to_file(public_key)).grid(column=0, row=5)
 
 def encrypt(entry, key):
     message = entry.get()
@@ -92,6 +103,13 @@ def decrypt(entry, key):
         return
     
     dec_message = crypt.decrypt(message, private_key)
+    dec_popup = tk.Toplevel(root)
+    dec_popup.title(t.t("decrypt.popup.title"))
+    dec_popup.geometry("210x200")
+    tk.Label(dec_popup, text=t.t("decrypt.popup.output", dec_message=dec_message), wraplength=200, font=("default", 5), anchor="center").grid(column=0, row=0)
+    tk.Button(dec_popup, text=t.t("decrypt.popup.copy"), command=lambda: clipboard(dec_message)).grid(column=0, row=1)
+    tk.Button(dec_popup, text=t.t("decrypt.popup.save"), command=lambda: save_message_to_file(dec_message)).grid(column=0, row=2)
+    tk.Button(dec_popup, text=t.t("global.close"), command=dec_popup.destroy).grid(column=0, row=3)
 
 # GUI
 frame = tk.Frame(root)

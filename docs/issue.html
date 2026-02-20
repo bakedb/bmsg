@@ -24,8 +24,7 @@
 </style>
 </head>
 <body>
-<h1>bmsg: Your simple message encryption application</h1>
-<p id="randomString"></p>
+<h1 id="randomString"></h1>
 <script>
     const strings = [
         "(,o-o,)",
@@ -38,17 +37,16 @@
         "(0^0)",
     ]
   const randomString = strings[Math.floor(Math.random() * strings.length)];
-  document.getElementById('randomString').innerText = `${randomString} this website is still under development.`;
+  document.getElementById('randomString').innerText = `${randomString} got a bug to report?`;
 </script>
-<div class="widget">
-    <h2>How to download and set up:</h2>
-    <div><code>git clone https://codeberg.org/bkd/bmsg.git</code>
-    <div><code>cd bmsg</code></div>
-    <div><code>python -m venv venv</code></div>
-    <div><code>source venv/bin/activate</code></div>
-    <div><code>pip install requirements.txt</code></div>
-    <p>Then to run:</p>
-    <code>python gui.py</code>
+<p>First of all, sorry for the bug.</p>
+<p>Go to one of the following remote repos (if you have a GitHub or Codeberg account) and make an issue in the issue tab.</p>
+<a href="https://codeberg.org/bkd/bmsg/issues">
+    <button>Go to Codeberg page</button>
+</a>
+<a href="https://github.com/bakedb/bmsg/issues">
+    <button>Go to GitHub page</button>
+</a>
 </div>
 </body>
 </html>
