@@ -1,11 +1,9 @@
 # This file was vibe coded
 # LANG_DIR will probably need to be modified if venv is not activated
-import json
-import os
-import re
+import json, os, re
 
 LANG_DIR = "languages"
-SOURCE = "en.json"
+SOURCE = "English (US).json"
 
 key_re = re.compile(r'^\s*"([^"]+)"\s*:')
 

@@ -15,11 +15,22 @@
         color: #f9abff;
     }
     .widget {
-        border: 4px solid #000000;
+        border: 10px inset #095376;
         padding: 15px;
         margin: 5px 0;
         border-radius: 15px;
         background-color: #b932b4;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .credits {
+        border: 10px inset #ec07d9;
+        padding: 15px;
+        margin: 5px 0;
+        border-radius: 15px;
+        background-color: #21668e;
+        display: inline-block;
+        vertical-align: top;
     }
 </style>
 </head>
@@ -41,8 +52,8 @@
   document.getElementById('randomString').innerText = `${randomString} this website is still under development.`;
 </script>
 <div class="widget">
-    <h2>How to download and set up:</h2>
-    <div><code>git clone https://codeberg.org/bkd/bmsg.git</code>
+    <p>How to download and set up:</p>
+    <div><code>git clone https://codeberg.org/bkd/bmsg.git</code></div>
     <div><code>cd bmsg</code></div>
     <div><code>python -m venv venv</code></div>
     <div><code>source venv/bin/activate</code></div>
@@ -50,5 +61,12 @@
     <p>Then to run:</p>
     <code>python gui.py</code>
 </div>
+<div class="credits">
+    <p>Credits</p>
+    <p>Main developer:</p><a href="https://baked.bio.link">bkd</a>
+</div>
 </body>
+<footer>
+<p style="display: inline;">Made with &lt;3 by </p><a href="https://baked.bio.link" style="color: #309edd;">bkd</a>
+</footer>
 </html>

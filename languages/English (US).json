@@ -1,24 +1,27 @@
 {
     "global.close": "Close",
     "global.error": "Error: {e}",
+    "global.save": "Save",
     
     "clipboard.label": "Copied to clipboard successfully!",
     
     "getkeys.label": "Public Key: {public}\nPrivate Key: {private}",
     "getkeys.copypublic": "Copy Public",
     "getkeys.copyprivate": "Copy Private",
-    "getkeys.savemessage": "Make sure to save both the public and private key.\nOne will not work without the other.\nNEVER share the private key!",
+    "getkeys.savemessage": "Make sure to save both the public and private key.\nOne will not work without the other.\nNEVER share the private key!\nThe private key can be stored in your config.ini, so never share that either!",
     "getkeys.save": "Save Public Key to File",
     "getkeys.tab": "Make Keys",
     "getkeys.button": "Generate New Keys",
     "getkeys.notgenerated": "No keys generated yet.",
+    "getkeys.savepublictoconfig": "Save Public Key to Config",
+    "getkeys.saveprivatetoconfig": "Save Private Key to Config",
 
     "encrypt.title": "Encrypt",
     "encrypt.label": "Encrypt your message:",
     "encrypt.keylabel": "The recipient's public key:",
     "encrypt.button": "Encrypt",
     "encrypt.popup.title": "Encrypted Message",
-    "encrypt.popup.output": "Encrypted message:\n{enc_message}",
+    "encrypt.popup.output": "Encrypted message:",
     "encrypt.popup.copy": "Copy Output",
     "encrypt.popup.save": "Save to File",
 
@@ -30,7 +33,15 @@
     "decrypt.popup.output": "Decrypted message:\n{dec_message}",
     "decrypt.popup.copy": "Copy Output",
     "decrypt.popup.save": "Save to File",
+    "decrypt.prefill": "Prefill Your Key",
 
-    "crash.title": "oops o.o",
+    "settings.tab": "Settings",
+    "settings.language": "Language",
+    "settings.theme": "Theme",
+    "settings.themeinfo": "List of all themes",
+    "settings.savepopup.title": "Saved Successfully",
+    "settings.savepopup.message": "Settings saved successfully!\nYou may need to restart the application to see some changes.",
+
+    "crash.title": "oops (,o.o),",
     "crash.message": "You made the program sad :(\nReport a bug or crash by making an Issue at https://bmsg.bkd.lol/issue."
 }

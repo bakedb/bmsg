@@ -20,3 +20,8 @@ python gui.py
 - more languages
 - website
 - add screenshots to readme
+- Add versioning to config.ini and a popup asking to update the config
+- Save button on generate keys tab with all save options
+- Add "manage keys" tab
+- Add password to private key
+- Actual theme selector

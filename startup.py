@@ -25,8 +25,7 @@ def startup():
     label.pack()
 
     # This is needed to have the sound play and the image display at the same time
-    root.after(100, lambda: 
-    playsound("jingle.wav"))
+    root.after(100, lambda: playsound("jingle.wav"))
 
     root.after(3000, root.destroy)
     root.mainloop()
