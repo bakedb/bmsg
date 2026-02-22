@@ -2,6 +2,8 @@
     "global.close": "Close",
     "global.error": "Error: {e}",
     "global.save": "Save",
+    "global.yes": "Yes",
+    "global.cancel": "Cancel",
     
     "clipboard.label": "Copied to clipboard successfully!",
     
@@ -20,6 +22,7 @@
     "encrypt.label": "Encrypt your message:",
     "encrypt.keylabel": "The recipient's public key:",
     "encrypt.button": "Encrypt",
+    "encrypt.openeditor": "Open Editor",
     "encrypt.popup.title": "Encrypted Message",
     "encrypt.popup.output": "Encrypted message:",
     "encrypt.popup.copy": "Copy Output",
@@ -34,6 +37,17 @@
     "decrypt.popup.copy": "Copy Output",
     "decrypt.popup.save": "Save to File",
     "decrypt.prefill": "Prefill Your Key",
+    "decrypt.openfile": "Open File",
+
+    "managekeys.tab": "Manage Keys",
+    "managekeys.copylabel": "Copy Keys",
+    "managekeys.deletelabel": "Delete Keys",
+    "managekeys.copypublic": "Copy Saved Public Key",
+    "managekeys.copyprivate": "Copy Saved Private Key",
+    "managekeys.deletepublic": "Delete Saved Public Key",
+    "managekeys.deleteprivate": "Delete Saved Private Key",
+    "managekeys.popup.title": "Are You Sure You Want to Delete?",
+    "managekeys.popup.info": "Are you sure you want to delete this key?",
 
     "settings.tab": "Settings",
     "settings.language": "Language",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3 (21 Feb 2026)
+- Made theme select a dropdown
+- Changed default theme to arc
+- Added key management page
+- Added functionality for encrypting and decrypting to .bmsg files
+
 ## 0.2 (20 Feb 2026)
 - Added decryption and settings tab
 - Implemented config file

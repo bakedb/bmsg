@@ -1,6 +1,6 @@
 {
     "clipboard.label": "Copied to cwipboard successfully~!",
-    "crash.message": "You made the pwogwam sad >//<\nWepowt a bug or cwash by making an Issue at https://bmsg.bkd.lol/issue pwease :3",
+    "crash.message": "You made the pwogwam sad >//~//<\nWepowt a bug or cwash by making an Issue at https://bmsg.bkd.lol/issue pwease :3",
     "crash.title": "grr (,=w=),",
     "decrypt.button": "Decwypt",
     "decrypt.keylabel": "Youw pwivate key:",
@@ -9,6 +9,16 @@
     "decrypt.popup.output": "Decwypted message:\n{dec_message}",
     "decrypt.popup.save": "Save to File owo",
     "decrypt.prefill": "Pwefiww Youw Key",
+    "decrypt.openfile": "Open File",
+    "managekeys.tab": "Manage Keys",
+    "managekeys.copylabel": "Copy Keys",
+    "managekeys.deletelabel": "Dewete Keys",
+    "managekeys.copypublic": "Copy Saved Pubwic Key",
+    "managekeys.copyprivate": "Copy Saved Pwivate Key",
+    "managekeys.deletepublic": "Dewete Saved Pubwic Key",
+    "managekeys.deleteprivate": "Dewete Saved Pwivate Key",
+    "managekeys.popup.title": "Are You Sure You Want to Dewete?",
+    "managekeys.popup.info": "Are you sure you want to dewete this key >~<?",
     "settings.tab": "Settings",
     "settings.language": "Wangwage",
     "settings.theme": "Theme",
@@ -18,6 +28,7 @@
     "decrypt.popup.title": "Decwypted Message",
     "decrypt.title": "Decwypt",
     "encrypt.button": "Encwypt",
+    "encrypt.openeditor": "Open Editow",
     "encrypt.keylabel": "The wecipient's pubwic key:",
     "encrypt.label": "Encwypt youw message:",
     "encrypt.popup.copy": "Copy Output owo",
@@ -37,5 +48,7 @@
     "getkeys.tab": "Make Keys",
     "global.close": "Cwose",
     "global.error": "Ewwow: {e}",
-    "global.save": "Save"
+    "global.save": "Save",
+    "global.yes": "Okie :3",
+    "global.cancel": "nope"
 }

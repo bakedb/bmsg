@@ -1,6 +1,7 @@
 import tkinter as tk
 import configparser as cfg
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, scrolledtext
+from tkinter.font import Font
 from ttkthemes import ThemedTk
 import crypt, startup, re, sys, json, os, webbrowser
 
@@ -28,7 +29,7 @@ else:
     config['config'] = {
         'language': 'English (US)',
         'dev': '0',
-        'theme': 'breeze'
+        'theme': 'arc'
     }
     config['keys'] = {
         'public': '',
@@ -51,7 +52,7 @@ root.set_theme(theme)
 notebook = ttk.Notebook(root)
 root.title(f"bmsg {version}")
 
-# Functions
+# Functions n' stuff
 def clipboard(input):
     root.clipboard_clear()
     root.clipboard_append(input)
@@ -80,12 +81,18 @@ def load_keys_from_file():
         return content
 
 def save_message_to_file(message):
-    f = filedialog.asksaveasfile(defaultextension=".txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    f = filedialog.asksaveasfile(defaultextension=".bmsg", filetypes=[("Encrypted Messages", "*.bmsg"), ("All Files", "*.*")])
     if f:
         content = str(message)
         # no need to use an "open as" here
         f.write(content)
         f.close()
+
+def load_message_from_file():
+    f = filedialog.askopenfile(defaultextension=".bmsg", filetypes=[("Encrypted Messages", "*.bmsg"), ("All Files", "*.*")])
+    if f:
+        content = f.read()
+        decrypted_entry.insert(0, content)
 
 def get_keys(length):
     keys = str(crypt.generate_keys(length))
@@ -145,11 +152,27 @@ def save_theme():
     with open(configfile, "w") as f:
         config.write(f)
 
-def save_key_to_config(key, type):
-    if type == "public":
-        config['keys']['public'] = key
-    elif type == "private":
-        config['keys']['private'] = key
+def save_key_to_config(key, type, clear_type=None):
+    def clear_key(key):
+        if key == "public":
+            config['keys']['public'] = ""
+        elif key == "private":
+            config['keys']['private'] = ""
+        with open(configfile, "w") as f:
+            config.write(f)
+        warn_popup.destroy()
+    if key != "":
+        if type == "public":
+            config['keys']['public'] = key
+        elif type == "private":
+            config['keys']['private'] = key
+    else:
+        if type == "clear":
+            warn_popup = tk.Toplevel(root)
+            warn_popup.title(t.t("managekeys.popup.title"))
+            ttk.Label(warn_popup, text=t.t("managekeys.popup.info")).grid(column=0, row=0)
+            ttk.Button(warn_popup, text=t.t("global.yes"), command=lambda: clear_key(clear_type)).grid(column=0, row=1)
+            ttk.Button(warn_popup, text=t.t("global.cancel"), command=warn_popup.destroy).grid(column=0, row=2)
     with open(configfile, "w") as f:
         config.write(f)
 
@@ -160,6 +183,20 @@ def save_config():
     save_popup.title(t.t("settings.savepopup.title"))
     ttk.Label(save_popup, text=t.t("settings.savepopup.message")).grid(column=0, row=0)
     ttk.Button(save_popup, text=t.t("global.close"), command=save_popup.destroy).grid(column=0, row=1)
+
+class TextEditor:
+    def __init__(self, window):
+        self.window = window
+        editor_window = tk.Toplevel(root)
+        self.text_entry = scrolledtext.ScrolledText(editor_window, wrap=tk.WORD)
+        self.text_entry.grid(column=0, row=0)
+        tk.Button(editor_window, text=t.t("global.save"), command=lambda: TextEditor.save(self.text_entry.get(1.0, tk.END).strip(), editor_window)).grid(column=0, row=1)
+    def save(input, window):
+        encrypted_entry.insert(0, input)
+        window.destroy()
+
+def openeditor():
+    editor = TextEditor(encrypt_tab)
 
 # GUI
 frame = ttk.Frame(root)
@@ -177,7 +214,8 @@ ttk.Label(encrypt_tab, text=t.t("encrypt.keylabel")).grid(column=0, row=1)
 public_key_entry = tk.Entry(encrypt_tab)
 public_key_entry.grid(column=1, row=1)
 
-ttk.Button(encrypt_tab, text=t.t("encrypt.button"), command=lambda: encrypt(encrypted_entry, public_key_entry)).grid(column=2, row=0)
+ttk.Button(encrypt_tab, text=t.t("encrypt.openeditor"), command=lambda: openeditor()).grid(column=2, row=0)
+ttk.Button(encrypt_tab, text=t.t("encrypt.button"), command=lambda: encrypt(encrypted_entry, public_key_entry)).grid(column=2, row=1)
 
 # Message decryption tab
 decrypt_tab = ttk.Frame(notebook)
@@ -193,6 +231,7 @@ private_key_entry.grid(column=1, row=1)
 
 ttk.Button(decrypt_tab, text=t.t("decrypt.button"), command=lambda: decrypt(decrypted_entry, private_key_entry)).grid(column=2, row=0)
 ttk.Button(decrypt_tab, text=t.t("decrypt.prefill"), command=lambda: private_key_entry.insert(0, config['keys']['private'])).grid(column=2, row=1)
+ttk.Button(decrypt_tab, text=t.t("decrypt.openfile"), command=lambda: load_message_from_file()).grid(column=1, row=2)
 
 # Key generator tab
 key_tab = ttk.Frame(notebook)
@@ -200,6 +239,16 @@ notebook.add(key_tab, text=t.t("getkeys.tab"))
 generate_keys_button = ttk.Button(key_tab, text=t.t("getkeys.button"), command=lambda: get_keys(1024)).grid(column=0, row=0)
 key_label = ttk.Label(key_tab, text=t.t("getkeys.notgenerated"))
 key_label.grid(column=0, row=1)
+
+# Manage keys tab
+manage_keys_tab = ttk.Frame(notebook)
+notebook.add(manage_keys_tab, text=t.t("managekeys.tab"))
+ttk.Label(manage_keys_tab, text=t.t("managekeys.copylabel")).grid(column=0, row=0)
+ttk.Button(manage_keys_tab, text=t.t("managekeys.copypublic"), command=lambda: clipboard(config['keys']['public'])).grid(column=1, row=0)
+ttk.Button(manage_keys_tab, text=t.t("managekeys.copyprivate"), command=lambda: clipboard(config['keys']['private'])).grid(column=2, row=0)
+ttk.Label(manage_keys_tab, text=t.t("managekeys.deletelabel")).grid(column=0, row=1)
+ttk.Button(manage_keys_tab, text=t.t("managekeys.deletepublic"), command=lambda: save_key_to_config("", "clear", "public")).grid(column=1, row=1)
+ttk.Button(manage_keys_tab, text=t.t("managekeys.deleteprivate"), command=lambda: save_key_to_config("", "clear", "private")).grid(column=2, row=1)
 
 # Settings tab
 settings_tab = ttk.Frame(notebook)
@@ -209,8 +258,8 @@ language_options = ttk.Combobox(settings_tab, values=["English (US)", "Engwish (
 language_options.set(current_language)
 language_options.grid(column=0, row=1)
 ttk.Label(settings_tab, text=t.t("settings.theme")).grid(column=0, row=2)
-theme_selection = ttk.Entry(settings_tab)
-theme_selection.insert(0, theme)
+theme_selection = ttk.Combobox(settings_tab, values=["adapta", "aquativo", "arc", "black", "blue", "breeze", "clearlooks", "elegance", "equilux", "itft1", "keramik", "kroc", "plastik", "smog", "ubuntu", "winxpblue", "yaru"])
+theme_selection.set(theme)
 theme_selection.grid(column=0, row=3)
 ttk.Button(settings_tab, text=t.t("settings.themeinfo"), command=lambda: webbrowser.open("https://ttkthemes.readthedocs.io/en/latest/themes.html")).grid(column=1, row=3)
 ttk.Button(settings_tab, text=t.t("global.save"), command=lambda: save_config()).grid(column=0, row=4)
