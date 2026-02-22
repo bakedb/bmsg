@@ -1,12 +1,12 @@
 import tkinter as tk
 import configparser as cfg
-from tkinter import ttk, filedialog, scrolledtext
+from tkinter import ttk, filedialog, scrolledtext, messagebox
 from tkinter.font import Font
 from ttkthemes import ThemedTk
 import crypt, startup, re, sys, json, os, webbrowser
 
 # Variables
-version = "0.2"
+version = "0.4"
 configfile = "config.ini"
 
 # Language translator (not mine)
@@ -32,18 +32,19 @@ else:
     config['config'] = {
         'language': 'English (US)',
         'dev': '0',
-        'theme': 'arc'
+        'theme': 'arc',
+        'key-security': '1024 (default)'
     }
     config['keys'] = {
         'public': '',
         'private': ''
     }
-    # Try to write the config file, but don't fail if we can't
+    # Try to write the config file
     try:
         with open(configfile, "w") as f:
             config.write(f)
     except (OSError, IOError):
-        # Config file might not be writable in bundled environment
+        # Config file might not be writable in bundled environment/windows binary
         pass
 
 # Ensure required sections exist
@@ -74,6 +75,15 @@ notebook = ttk.Notebook(root)
 root.title(f"bmsg {version}")
 
 # Functions n' stuff
+
+def handle_crash(exc_type, exc_value, exc_traceback):
+    import traceback
+    error_details = ''.join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+    print(f"Unhandled exception: {error_details}")  # Log to console
+    messagebox.showwarning(title=t.t("crash.title"), message=t.t("crash.message"))
+
+sys.excepthook = handle_crash
+
 def clipboard(input):
     root.clipboard_clear()
     root.clipboard_append(input)
@@ -127,6 +137,13 @@ def get_keys(length):
     ttk.Button(key_tab, text=t.t("getkeys.save"), command=lambda: save_keys_to_file(public_key)).grid(column=0, row=5)
     ttk.Button(key_tab, text=t.t("getkeys.savepublictoconfig"), command=lambda: save_key_to_config(public_key, "public")).grid(column=0, row=6)
     ttk.Button(key_tab, text=t.t("getkeys.saveprivatetoconfig"), command=lambda: save_key_to_config(private_key, "private")).grid(column=0, row=7)
+
+def get_keys_wrapper():
+    length = config['config']['key-security']
+    if length == "1024 (default)":
+        get_keys(1024)
+    elif length == "2048 (secure, slower)":
+        get_keys(2048)
 
 def encrypt(entry, key):
     message = entry.get()
@@ -200,10 +217,27 @@ def save_key_to_config(key, type, clear_type=None):
 def save_config():
     save_language()
     save_theme()
+    save_security()
     save_popup = tk.Toplevel(root)
     save_popup.title(t.t("settings.savepopup.title"))
     ttk.Label(save_popup, text=t.t("settings.savepopup.message")).grid(column=0, row=0)
     ttk.Button(save_popup, text=t.t("global.close"), command=save_popup.destroy).grid(column=0, row=1)
+
+def save_security():
+    value = key_security_setting.get()
+    config['config']['key-security'] = value
+    with open(configfile, "w") as f:
+        config.write(f)
+
+def test_crash():
+    try:
+        raise Exception("Test crash triggered intentionally")
+    except Exception as e:
+        handle_crash(type(e), e, e.__traceback__)
+
+def test_crash_continue():
+    # raise Exception("Test crash triggered intentionally")
+    sys.exit(1)
 
 class TextEditor:
     def __init__(self, window):
@@ -257,7 +291,7 @@ ttk.Button(decrypt_tab, text=t.t("decrypt.openfile"), command=lambda: load_messa
 # Key generator tab
 key_tab = ttk.Frame(notebook)
 notebook.add(key_tab, text=t.t("getkeys.tab"))
-generate_keys_button = ttk.Button(key_tab, text=t.t("getkeys.button"), command=lambda: get_keys(1024)).grid(column=0, row=0)
+generate_keys_button = ttk.Button(key_tab, text=t.t("getkeys.button"), command=lambda: get_keys(get_keys_wrapper())).grid(column=0, row=0)
 key_label = ttk.Label(key_tab, text=t.t("getkeys.notgenerated"))
 key_label.grid(column=0, row=1)
 
@@ -283,13 +317,17 @@ theme_selection = ttk.Combobox(settings_tab, values=["adapta", "aquativo", "arc"
 theme_selection.set(theme)
 theme_selection.grid(column=0, row=3)
 ttk.Button(settings_tab, text=t.t("settings.themeinfo"), command=lambda: webbrowser.open("https://ttkthemes.readthedocs.io/en/latest/themes.html")).grid(column=1, row=3)
-ttk.Button(settings_tab, text=t.t("global.save"), command=lambda: save_config()).grid(column=0, row=4)
+ttk.Label(settings_tab, text=t.t("settings.securitylabel")).grid(column=0, row=4)
+key_security_setting = ttk.Combobox(settings_tab, values=["1024 (default)", "2048 (secure, slower)"])
+key_security_setting.set(config['config']['key-security'])
+key_security_setting.grid(column=0, row=5)
+ttk.Button(settings_tab, text=t.t("global.save"), command=lambda: save_config()).grid(column=0, row=6)
+
+# Dev tab
+dev_tab = ttk.Frame(notebook)
+notebook.add(dev_tab, text=t.t("devoptions.tab"))
+ttk.Button(dev_tab, text=t.t("devoptions.testcrash"), command=lambda: test_crash()).grid(column=0, row=0)
 
 notebook.grid()
-
-# Crash handler
-def on_crash(exec_type, exc, tb):
-    tk.messagebox.showwarning(title=t.t("crash.title"), message=t.t("crash.message"))
-sys.excepthook = on_crash
 
 tk.mainloop()

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4 (22 Feb 2026)
+- Added key security options for 1024 and 2048
+- Added slightly better crash handling
+- Added dev tab
+
 ## 0.3 (21 Feb 2026)
 - Made theme select a dropdown
 - Changed default theme to arc

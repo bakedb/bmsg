@@ -63,6 +63,7 @@ python -m nuitka \
     --mingw64 \
     gui.py
 ```
+add any other files that might be missing.
 
 ## What Gets Included
 

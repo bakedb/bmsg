@@ -55,6 +55,14 @@
     "settings.themeinfo": "List of all themes",
     "settings.savepopup.title": "Saved Successfully",
     "settings.savepopup.message": "Settings saved successfully!\nYou may need to restart the application to see some changes.",
+    "settings.securitylabel": "Key Security Setting",
+
+    "devoptions.tab": "Developer",
+    "devoptions.testcrash": "Test Crash",
+    "devoptions.testcrash.title": "Are you sure?",
+    "devoptions.testcrash.message": "Are you sure you want to continue?\nNote that this will crash the program.\nJust making sure...",
+    "devoptions.testcrash.confirm": "Go for it.",
+    "devoptions.testcrash.cancel": "Wait nevermind",
 
     "crash.title": "oops (,o.o),",
     "crash.message": "You made the program sad :(\nReport a bug or crash by making an Issue at https://bmsg.bkd.lol/issue."

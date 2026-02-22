@@ -12,3 +12,8 @@ Run:
 ```bash
 python gui.py
 ```
+
+## Screenshots
+![Encrypt tab](/docs/assets/image.png)
+![Generate keys tab](/docs/assets/image1.png)
+![Simple config](/docs/assets/image2.png)
