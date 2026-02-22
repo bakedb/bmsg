@@ -23,9 +23,12 @@ class Translator:
 
 # Parse config
 config = cfg.ConfigParser()
-if os.path.exists(configfile):
+config_file_exists = os.path.exists(configfile)
+
+if config_file_exists:
     config.read(configfile)
 else:
+    # Create default config structure
     config['config'] = {
         'language': 'English (US)',
         'dev': '0',
@@ -35,8 +38,26 @@ else:
         'public': '',
         'private': ''
     }
-    with open(configfile, "w") as f:
-        config.write(f)
+    # Try to write the config file, but don't fail if we can't
+    try:
+        with open(configfile, "w") as f:
+            config.write(f)
+    except (OSError, IOError):
+        # Config file might not be writable in bundled environment
+        pass
+
+# Ensure required sections exist
+if 'config' not in config:
+    config['config'] = {
+        'language': 'English (US)',
+        'dev': '0', 
+        'theme': 'arc'
+    }
+if 'keys' not in config:
+    config['keys'] = {
+        'public': '',
+        'private': ''
+    }
 
 t = Translator(config['config']['language'])
 current_language = config['config']['language']
