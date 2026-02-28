@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.1 (22 Feb 2026)
+- Fixed developer tab still showing up while dev = 0
+
 ## 0.4 (22 Feb 2026)
 - Added key security options for 1024 and 2048
 - Added slightly better crash handling

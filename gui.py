@@ -6,7 +6,8 @@ from ttkthemes import ThemedTk
 import crypt, startup, re, sys, json, os, webbrowser
 
 # Variables
-version = "0.4"
+version = "0.4.1"
+
 configfile = "config.ini"
 
 # Language translator (not mine)
@@ -324,9 +325,10 @@ key_security_setting.grid(column=0, row=5)
 ttk.Button(settings_tab, text=t.t("global.save"), command=lambda: save_config()).grid(column=0, row=6)
 
 # Dev tab
-dev_tab = ttk.Frame(notebook)
-notebook.add(dev_tab, text=t.t("devoptions.tab"))
-ttk.Button(dev_tab, text=t.t("devoptions.testcrash"), command=lambda: test_crash()).grid(column=0, row=0)
+if config['config']['dev'] == "1":
+    dev_tab = ttk.Frame(notebook)
+    notebook.add(dev_tab, text=t.t("devoptions.tab"))
+    ttk.Button(dev_tab, text=t.t("devoptions.testcrash"), command=lambda: test_crash()).grid(column=0, row=0)
 
 notebook.grid()
 
