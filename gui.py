@@ -52,7 +52,7 @@ else:
 if 'config' not in config:
     config['config'] = {
         'language': 'English (US)',
-        'dev': '0', 
+        'dev': '0',
         'theme': 'arc'
     }
 if 'keys' not in config:
@@ -91,7 +91,7 @@ def clipboard(input):
     top = tk.Toplevel()
     top.geometry("210x60")
     ttk.Label(top, text=t.t("clipboard.label")).grid()
-    ttk.Button(top, text="Ok", command=top.destroy).grid()   
+    ttk.Button(top, text="Ok", command=top.destroy).grid()
 
 def save_both_keys_to_file(public, private):
     f = filedialog.asksaveasfile(defaultextension=".txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
@@ -154,7 +154,7 @@ def encrypt(entry, key):
     except ValueError as e:
         ttk.Label(encrypt_tab, text=t.t("global.error", e=e)).grid(column=2, row=1)
         return
-    
+
     enc_message = crypt.encrypt(message, public_key)
     enc_popup = tk.Toplevel(root)
     enc_popup.title(t.t("encrypt.popup.title"))
@@ -172,7 +172,7 @@ def decrypt(entry, key):
     except ValueError as e:
         ttk.Label(decrypt_tab, text=t.t("global.error", e=e)).grid(column=2, row=1)
         return
-    
+
     dec_message = crypt.decrypt(message, private_key)
     dec_popup = tk.Toplevel(root)
     dec_popup.title(t.t("decrypt.popup.title"))
