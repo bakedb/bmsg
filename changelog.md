@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.2 (07 May 2026)
+- Added install and launch scripts for Linux
+
 ## 0.4.1 (22 Feb 2026)
 - Fixed developer tab still showing up while dev = 0
 

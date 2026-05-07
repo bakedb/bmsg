@@ -52,26 +52,30 @@
         "(0^0)",
     ]
   const randomString = strings[Math.floor(Math.random() * strings.length)];
-  document.getElementById('randomString').innerText = `${randomString} this website is still under development.`;
+  document.getElementById('randomString').innerText = `${randomString} not sure why you would trust an application with a website that looks like this with your data, but whatever`;
 </script>
 <div class="widget">
     <p>How to download and set up:</p>
     <a href="https://github.com/bakedb/bmsg/releases">Go to the GitHub releases page and download the latest version for your system.</a>
     <p>Or for Linux CLI:</p>
-    <div><code>git clone https://codeberg.org/bkd/bmsg.git</code></div>
+    <div><code>git clone https://git.gay/bkd/bmsg.git</code></div>
     <div><code>cd bmsg</code></div>
     <div><code>python -m venv venv</code></div>
     <div><code>source venv/bin/activate</code></div>
     <div><code>pip install requirements.txt</code></div>
     <p>Then to run:</p>
     <code>python gui.py</code>
+    <p>Note that there are now install scripts for v0.4.2 and above! Just run <code>install.sh</code> to install dependencies and <code>bmsg.sh</code> to run.</p>
 </div>
 <div class="credits">
     <p>Credits</p>
-    <p>Main developer:</p><a href="https://baked.bio.link">bkd</a>
+    <p>Main developer:</p><a href="https://bkd.lol">bkd</a>
 </div>
 <div class="blog">
     <h1>Blog Section (Most recent on top)</h1>
+    <h2>Install scripts are now available for Linux!</h2>
+    <h3>07 May 2026</h3>
+    <p>With the release of hotfix 0.4.2, Linux install and run scripts are included in the release files. Just run <code>install.sh</code> to install dependencies and <code>bmsg.sh</code> to run the program.</p>
     <h2>Sorry Windows users!</h2>
     <h3>21 March 2026</h3>
     <p>So it turns out that the Windows binaries that are being distributed on the GitHub releases page are all broken. They work perfectly fine on Linux through Wine, suprisingly. However, when I had the opportunity to test them on Windows 10 a few days ago, it said that it was not made for the correct operating system or something like that. That's probably an error on Nuitka's end (the thing that I use to package the Windows binaries), but I reckon that if you really want it working on Windows, someone will find a way. Oh, well... never liked Windows anyway.</p>
@@ -83,6 +87,6 @@
 </div>
 </body>
 <footer>
-<p style="display: inline;">Made with &lt;3 by </p><a href="https://baked.bio.link" style="color: #309edd;">bkd</a>
+<p style="display: inline;">Made with &lt;3 by </p><a href="https://bkd.lol" style="color: #309edd;">bkd</a>
 </footer>
 </html>
