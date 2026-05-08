@@ -7,3 +7,4 @@ USER_HOME=$(eval echo "~$SUDO_USER")
 rm -rf /usr/share/bmsg
 rm /usr/bin/bmsg
 rm -rf "$USER_HOME/.config/bmsg"
+rm /usr/share/applications/bmsg.desktop
