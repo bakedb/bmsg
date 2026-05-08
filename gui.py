@@ -3,10 +3,10 @@ import configparser as cfg
 from tkinter import ttk, filedialog, scrolledtext, messagebox
 from tkinter.font import Font
 from ttkthemes import ThemedTk
-import crypt, re, sys, json, os, webbrowser
+import crypt, re, sys, json, os, webbrowser, requests, subprocess
 
 # Variables
-version = "0.4.4"
+version = "0.4.5"
 
 configfile = os.path.expanduser("~/.config/bmsg/config.ini")
 
@@ -46,7 +46,7 @@ else:
             config.write(f)
     except (OSError, IOError):
         # Give error message if config file is not writiable.
-        tk.messagebox.showerror(title=None, parent=root, message="The configuration file could not be written to.")
+        messagebox.showerror(title=None, message="The configuration file could not be written to.")
         pass
 
 t = Translator(config['config']['language'])
@@ -241,6 +241,14 @@ class TextEditor:
 
 def openeditor():
     editor = TextEditor(encrypt_tab)
+
+def check_for_updates():
+    current_version = requests.get("https://bmsg.bkd.lol/version")
+    if current_version != version:
+        update_prompt = messagebox.askyesno(message=f"There is an update available. Update now?")
+        if update_prompt:
+            subprocess.run(['curl', '-O', 'https://raw.githubusercontent.com/bakedb/bmsg/refs/heads/main/curlintobash.sh'], capture_output=True, text=True)
+            subprocess.run(['bash', 'curlintobash.sh'], capture_output=True, text=True)
 
 # GUI
 frame = ttk.Frame(root)
