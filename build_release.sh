@@ -16,4 +16,4 @@ cp setup.sh $1/setup.sh
 cp default_config.ini $1/default_config.ini
 cp bmsg.desktop $1/bmsg.desktop
 cp uninstall.sh $1/uninstall.sh
-tar -czf "bmsg-$1-linux.tar.gz" $1
+tar -czf "bmsg-$1.tar.gz" $1

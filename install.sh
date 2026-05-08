@@ -5,6 +5,7 @@ if [[ "$EUID" -ne 0 ]]; then
 fi
 USER_HOME=$(eval echo "~$SUDO_USER")
 mkdir /usr/share/bmsg
+cp LICENSE /usr/share/licenses/bmsg
 cp bkd.png /usr/share/bmsg/bkd.png
 cp bmsg.sh /usr/bin/bmsg
 cp gui.py /usr/share/bmsg/gui.py
