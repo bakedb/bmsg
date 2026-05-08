@@ -8,7 +8,7 @@ Install:
 ```
 Run:
 ```bash
-./bmsg.sh
+bmsg
 ```
 
 ## Screenshots

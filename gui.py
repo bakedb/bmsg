@@ -6,9 +6,9 @@ from ttkthemes import ThemedTk
 import crypt, startup, re, sys, json, os, webbrowser
 
 # Variables
-version = "0.4.1"
+version = "0.4.3"
 
-configfile = "config.ini"
+configfile = os.path.expanduser("~/.config/bmsg/config.ini")
 
 # Language translator (not mine)
 class Translator:

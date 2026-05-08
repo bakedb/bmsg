@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.3 (07 May 2026)
+- Added real install scripts and desktop files for Linux
+
 ## 0.4.2 (07 May 2026)
 - Added install and launch scripts for Linux
 

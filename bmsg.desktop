@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=0.4.3
+Type=Application
+Name=bmsg
+Comment=Simple Message Ecryption Application.
+Exec=/usr/bin/bmsg %U
