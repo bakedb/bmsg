@@ -8,3 +8,4 @@
 - First-launch message
 - Implement multiple languages in intro.py
 - Updater
+- Replace copy with install in install.sh

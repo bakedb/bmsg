@@ -8,7 +8,6 @@ cp gui.py $1/gui.py
 cp intro.py $1/intro.py
 cp -r languages/ $1/languages/
 cp readme.md $1/readme.md
-cp startup.py $1/startup.py
 cp LICENSE $1/LICENSE
 cp jingle.wav $1/jingle.wav
 cp requirements.txt $1/requirements.txt

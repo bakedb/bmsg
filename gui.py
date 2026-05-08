@@ -3,10 +3,10 @@ import configparser as cfg
 from tkinter import ttk, filedialog, scrolledtext, messagebox
 from tkinter.font import Font
 from ttkthemes import ThemedTk
-import crypt, startup, re, sys, json, os, webbrowser
+import crypt, re, sys, json, os, webbrowser
 
 # Variables
-version = "0.4.3"
+version = "0.4.4"
 
 configfile = os.path.expanduser("~/.config/bmsg/config.ini")
 
@@ -45,28 +45,16 @@ else:
         with open(configfile, "w") as f:
             config.write(f)
     except (OSError, IOError):
-        # Config file might not be writable in bundled environment/windows binary
+        # Give error message if config file is not writiable.
+        tk.messagebox.showerror(title=None, parent=root, message="The configuration file could not be written to.")
         pass
-
-# Ensure required sections exist
-if 'config' not in config:
-    config['config'] = {
-        'language': 'English (US)',
-        'dev': '0',
-        'theme': 'arc'
-    }
-if 'keys' not in config:
-    config['keys'] = {
-        'public': '',
-        'private': ''
-    }
 
 t = Translator(config['config']['language'])
 current_language = config['config']['language']
 
-# Skip startup sequence for dev versions
-if config['config']['dev'] != "1":
-    startup.startup()
+# Removed intro sequence in 0.4.4, you can bring it back with depreciated/startup.py
+# if config['config']['dev'] != "1":
+    # startup.startup()
 
 # Set up tkinter
 root = ThemedTk()

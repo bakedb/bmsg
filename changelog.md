@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.4 (08 May 2026)
+- Depreciated startup.py and removed startup animation
+- Running install.sh no longer replaces config.ini, making it safe for updating use
+- Added an error popup for when config is not writable
+
 ## 0.4.3 (07 May 2026)
 - Added real install scripts and desktop files for Linux
 

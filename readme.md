@@ -2,7 +2,7 @@
 bmsg (b message) is a simple message encryption and decryption tool using RSA and a Tkinter GUI.
 
 ## Usage
-Install:
+Install or update (does not overwrite existing config):
 ```bash
 ./install.sh
 ```
