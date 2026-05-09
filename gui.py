@@ -3,7 +3,7 @@ import configparser as cfg
 from tkinter import ttk, filedialog, scrolledtext, messagebox
 from tkinter.font import Font
 from ttkthemes import ThemedTk
-import crypt, re, sys, json, os, webbrowser, requests, subprocess
+import crypt, re, sys, json, os, webbrowser, requests, subprocess, argparse
 
 # Variables
 version = "0.4.5"
@@ -245,10 +245,12 @@ def openeditor():
 def check_for_updates():
     current_version = requests.get("https://bmsg.bkd.lol/version")
     if current_version != version:
-        update_prompt = messagebox.askyesno(message=f"There is an update available. Update now?")
+        update_prompt = messagebox.askyesno(message=t.t("settings.updateprompt"))
+        print(f"Update prompt returned {update_prompt}")
         if update_prompt:
-            subprocess.run(['curl', '-O', 'https://raw.githubusercontent.com/bakedb/bmsg/refs/heads/main/curlintobash.sh'], capture_output=True, text=True)
-            subprocess.run(['bash', 'curlintobash.sh'], capture_output=True, text=True)
+            messagebox.showinfo(message=t.t("settings.updateinfo"))
+    else:
+        messagebox.showinfo(message=t.t("settings.noupdate"))
 
 # GUI
 frame = ttk.Frame(root)
@@ -319,6 +321,7 @@ key_security_setting = ttk.Combobox(settings_tab, values=["1024 (default)", "204
 key_security_setting.set(config['config']['key-security'])
 key_security_setting.grid(column=0, row=5)
 ttk.Button(settings_tab, text=t.t("global.save"), command=lambda: save_config()).grid(column=0, row=6)
+ttk.Button(settings_tab, text=t.t("settings.checkforupdates"), command=lambda: check_for_updates()).grid(column=0, row=7)
 
 # Dev tab
 if config['config']['dev'] == "1":

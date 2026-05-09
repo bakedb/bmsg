@@ -1,3 +1,4 @@
 rsa
 playsound3
 ttkthemes
+requests

@@ -6,11 +6,9 @@ fi
 USER_HOME=$(eval echo "~$SUDO_USER")
 mkdir -p /usr/share/bmsg
 cp LICENSE /usr/share/licenses/bmsg
-cp bkd.png /usr/share/bmsg/bkd.png
 cp bmsg.sh /usr/bin/bmsg
 cp gui.py /usr/share/bmsg/gui.py
 cp intro.py /usr/share/bmsg/intro.py
-cp jingle.wav /usr/share/bmsg/jingle.wav
 cp -r languages/ /usr/share/bmsg/languages
 cp LICENSE /usr/share/bmsg/LICENSE
 cp requirements.txt /usr/share/bmsg/requirements.txt

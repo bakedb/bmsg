@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.5 (08 May 2026)
+- Curl into Bash script now works in a temp directory
+- Added a Check for Updates button
+- Requests is now a required Python module
+- Depreciated bkd.png and jingle.wav now that the startup animation is removed
+
 ## 0.4.4 (08 May 2026)
 - Depreciated startup.py and removed startup animation
 - Running install.sh no longer replaces config.ini, making it safe for updating use

@@ -56,6 +56,10 @@
     "settings.savepopup.title": "Saved Successfully",
     "settings.savepopup.message": "Settings saved successfully!\nYou may need to restart the application to see some changes.",
     "settings.securitylabel": "Key Security Setting",
+    "settings.checkforupdates": "Check For Updates",
+    "settings.updateprompt": "There is an update available. Update now?",
+    "settings.updateinfo": "Run 'bmsg update' in a terminal to update to the latest version.",
+    "settings.noupdate": "No updates available.",
 
     "devoptions.tab": "Developer",
     "devoptions.testcrash": "Test Crash",
