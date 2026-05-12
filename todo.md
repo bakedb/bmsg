@@ -6,5 +6,6 @@
 - Add password to private key
 - First-launch message
 - Replace copy with install in install.sh
+- Remove playsound from requirements
 ## What can come after 1.0
 - more languages
