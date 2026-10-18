@@ -8,3 +8,6 @@ profiles.json
 /nuitka_env
 bmsg.exe
 /gui.onefile-build
+bmsg-*.tar.gz
+/.vscode
+/.idea

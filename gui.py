@@ -6,7 +6,7 @@ from ttkthemes import ThemedTk
 import crypt, re, sys, json, os, webbrowser, requests, subprocess, argparse
 
 # Variables
-version = "0.4.5"
+version = "0.5"
 
 configfile = os.path.expanduser("~/.config/bmsg/config.ini")
 
@@ -33,6 +33,7 @@ else:
     config['config'] = {
         'language': 'English (US)',
         'dev': '0',
+        'firstlaunch': '1',
         'theme': 'arc',
         'key-security': '1024 (default)'
     }
@@ -45,7 +46,7 @@ else:
         with open(configfile, "w") as f:
             config.write(f)
     except (OSError, IOError):
-        # Give error message if config file is not writiable.
+        # Give error message if config file is not writable.
         messagebox.showerror(title=None, message="The configuration file could not be written to.")
         pass
 
@@ -53,8 +54,11 @@ t = Translator(config['config']['language'])
 current_language = config['config']['language']
 
 # Removed intro sequence in 0.4.4, you can bring it back with depreciated/startup.py
-# if config['config']['dev'] != "1":
-    # startup.startup()
+# The playsound dependency was removed in 0.5, so that needs to be installed too
+"""
+if config['config']['dev'] != "1":
+    startup.startup()
+"""
 
 # Set up tkinter
 root = ThemedTk()
@@ -62,6 +66,13 @@ theme = config['config']['theme']
 root.set_theme(theme)
 notebook = ttk.Notebook(root)
 root.title(f"bmsg {version}")
+
+# First-time setup popup (WIP)
+if config['config']['firstlaunch'] == "1":
+    tutorial_popup = tk.Toplevel(root)
+    tutorial_popup.title(t.t("tutorial.title"))
+    ttk.Label(tutorial_popup, text=t.t("tutorial.welcome")).grid(column=0, row=0)
+    config['config']['firstlaunch'] == 0
 
 # Functions n' stuff
 
@@ -73,9 +84,9 @@ def handle_crash(exc_type, exc_value, exc_traceback):
 
 sys.excepthook = handle_crash
 
-def clipboard(input):
+def clipboard(text):
     root.clipboard_clear()
-    root.clipboard_append(input)
+    root.clipboard_append(text)
     top = tk.Toplevel()
     top.geometry("210x60")
     ttk.Label(top, text=t.t("clipboard.label")).grid()
@@ -235,8 +246,8 @@ class TextEditor:
         self.text_entry = scrolledtext.ScrolledText(editor_window, wrap=tk.WORD)
         self.text_entry.grid(column=0, row=0)
         tk.Button(editor_window, text=t.t("global.save"), command=lambda: TextEditor.save(self.text_entry.get(1.0, tk.END).strip(), editor_window)).grid(column=0, row=1)
-    def save(input, window):
-        encrypted_entry.insert(0, input)
+    def save(text, window):
+        encrypted_entry.insert(0, text)
         window.destroy()
 
 def openeditor():
@@ -251,6 +262,12 @@ def check_for_updates():
             messagebox.showinfo(message=t.t("settings.updateinfo"))
     else:
         messagebox.showinfo(message=t.t("settings.noupdate"))
+
+def key_save_options():
+    key_save_popup = tk.Toplevel(root)
+    key_save_popup.title(t.t("settings.savekeypopup.title"))
+    ttk.Label(save_popup, text=t.t("settings.savekeypopup.message")).grid(column=0, row=0)
+    ttk.Button(save_popup, text=t.t("global.close"), command=save_popup.destroy).grid(column=0, row=1)
 
 # GUI
 frame = ttk.Frame(root)
@@ -322,6 +339,14 @@ key_security_setting.set(config['config']['key-security'])
 key_security_setting.grid(column=0, row=5)
 ttk.Button(settings_tab, text=t.t("global.save"), command=lambda: save_config()).grid(column=0, row=6)
 ttk.Button(settings_tab, text=t.t("settings.checkforupdates"), command=lambda: check_for_updates()).grid(column=0, row=7)
+
+# About tab
+about_tab = ttk.Frame(notebook)
+notebook.add(about_tab, text=t.t("about.tab"))
+ttk.Label(about_tab, text=f"bmsg {version}").grid(column=0, row=0)
+ttk.Label(about_tab, text=t.t("about.message")).grid(column=0, row=1)
+ttk.Label(about_tab, text=t.t("about.donatetitle")).grid(column=2, row=0)
+ttk.Button(about_tab, text=t.t("about.donatebutton"), command=lambda: webbrowser.open("https://bkd.lol/support")).grid(column=2, row=1)
 
 # Dev tab
 if config['config']['dev'] == "1":

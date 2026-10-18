@@ -6,6 +6,9 @@
     "global.cancel": "Cancel",
     
     "clipboard.label": "Copied to clipboard successfully!",
+
+    "tutorial.title": "Welcome to bmsg!",
+    "tutorial.welcome": "Welcome to bmsg!",
     
     "getkeys.label": "Public Key: {public}\nPrivate Key: {private}",
     "getkeys.copypublic": "Copy Public",
@@ -60,6 +63,11 @@
     "settings.updateprompt": "There is an update available. Update now?",
     "settings.updateinfo": "Run 'bmsg update' in a terminal to update to the latest version.",
     "settings.noupdate": "No updates available.",
+
+    "about.tab": "About",
+    "about.message": "Made with <3",
+    "about.donatetitle": "Want to donate?",
+    "about.donatebutton": "Support here",
 
     "devoptions.tab": "Developer",
     "devoptions.testcrash": "Test Crash",

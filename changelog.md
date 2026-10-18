@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5 (18 October 2026)
+Oops, I blinked and now 5 months have passed.
+- Added a nice release_instructions.md file for any developers
+- Added an "About" tab with the version and a donation button
+- Removed the `playsound` dependency
+- Added a work-in-progress first-launch screen
+
 ## 0.4.5 (08 May 2026)
 - Curl into Bash script now works in a temp directory
 - Added a Check for Updates button
